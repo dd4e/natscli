@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
-	"github.com/nats-io/nats"
+	"github.com/nats-io/nats.go"
 )
 
 func main() {
@@ -22,7 +23,6 @@ func main() {
 	nc, err := nats.Connect(*host)
 	if err != nil {
 		log.Fatal("Failed connecting to nats server")
-
 	} else {
 		log.Print("Connected to nats at url: " + *host)
 	}
@@ -52,8 +52,11 @@ func main() {
 				log.Print("Topic::" + *topic + "   message::" + string(m.Data))
 			})
 		}
+
 		for {
+			time.Sleep(time.Duration(1 * time.Second))
 		}
+
 	}
 
 }
